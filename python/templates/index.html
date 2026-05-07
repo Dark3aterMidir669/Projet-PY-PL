@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProPytho - Optimisation Laitiere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <h1>ProPytho</h1>
+            <p class="subtitle">Optimisation de production laitiere par programmation lineaire</p>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="container">
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="setup">CONFIGURATION</button>
+                <button class="tab-button" data-tab="results">RESULTATS</button>
+                <button class="tab-button" data-tab="model">MODELE</button>
+            </div>
+
+            <!-- Setup Tab -->
+            <div id="setup" class="tab-content active">
+                <section class="setup-section">
+                    <h2>Donnees de Production</h2>
+                    
+                    <!-- Quick Load -->
+                    <div class="quick-actions">
+                        <button id="load-default-btn" class="btn btn-primary">Charger donnees par defaut</button>
+                    </div>
+
+                    <!-- Products Section -->
+                    <div class="products-section">
+                        <h3>Produits</h3>
+                        <div class="products-grid">
+                            <!-- Lait -->
+                            <div class="product-card">
+                                <h4>Lait en sachet</h4>
+                                <div class="form-group">
+                                    <label for="lait-profit">Profit unitaire (devises)</label>
+                                    <input type="number" id="lait-profit" class="form-input" value="20" min="0" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lait-consumption">Consommation lait (kg/unite)</label>
+                                    <input type="number" id="lait-consumption" class="form-input" value="1.0" min="0.01" step="0.01">
+                                </div>
+                            </div>
+
+                            <!-- Yaourt -->
+                            <div class="product-card">
+                                <h4>Yaourt</h4>
+                                <div class="form-group">
+                                    <label for="yaourt-profit">Profit unitaire (devises)</label>
+                                    <input type="number" id="yaourt-profit" class="form-input" value="40" min="0" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="yaourt-consumption">Consommation lait (kg/unite)</label>
+                                    <input type="number" id="yaourt-consumption" class="form-input" value="1.2" min="0.01" step="0.01">
+                                </div>
+                            </div>
+
+                            <!-- Fromage -->
+                            <div class="product-card">
+                                <h4>Fromage</h4>
+                                <div class="form-group">
+                                    <label for="fromage-profit">Profit unitaire (devises)</label>
+                                    <input type="number" id="fromage-profit" class="form-input" value="300" min="0" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fromage-consumption">Consommation lait (kg/unite)</label>
+                                    <input type="number" id="fromage-consumption" class="form-input" value="8.0" min="0.01" step="0.01">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources Section -->
+                    <div class="resources-section">
+                        <h3>Ressources Disponibles</h3>
+                        <div class="resources-grid">
+                            <div class="resource-card">
+                                <h4>Lait cru</h4>
+                                <div class="form-group">
+                                    <label for="resource-lait">Quantite (kg)</label>
+                                    <input type="number" id="resource-lait" class="form-input" value="1000" min="1" step="1">
+                                </div>
+                            </div>
+
+                            <div class="resource-card">
+                                <h4>Temps de travail</h4>
+                                <div class="form-group">
+                                    <label for="resource-temps">Quantite (heures)</label>
+                                    <input type="number" id="resource-temps" class="form-input" value="160" min="1" step="1">
+                                </div>
+                            </div>
+
+                            <div class="resource-card">
+                                <h4>Capacite refrigeration</h4>
+                                <div class="form-group">
+                                    <label for="resource-frigo">Quantite (kg)</label>
+                                    <input type="number" id="resource-frigo" class="form-input" value="500" min="1" step="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button id="optimize-btn" class="btn btn-success btn-large">LANCER OPTIMISATION</button>
+                        <button id="validate-btn" class="btn btn-secondary">Valider les donnees</button>
+                    </div>
+
+                    <!-- Messages -->
+                    <div id="messages" class="messages"></div>
+                </section>
+            </div>
+
+            <!-- Results Tab -->
+            <div id="results" class="tab-content">
+                <section class="results-section">
+                    <h2>Resultats de l'Optimisation</h2>
+                    
+                    <div id="results-content" class="results-content">
+                        <p class="placeholder">Les resultats s'afficheront ici apres optimisation</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Model Tab -->
+            <div id="model" class="tab-content">
+                <section class="model-section">
+                    <h2>Modele Mathematique</h2>
+                    <div id="model-content" class="model-content">
+                        <p class="placeholder">Charge le modele apres optimisation</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>ProPytho - Optimisation de production laitiere par algorithme Simplexe</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
